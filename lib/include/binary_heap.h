@@ -1,15 +1,6 @@
 #include <vector>
 #include <concepts>
 
-/*
- * Проще всего бинарную кучу считать массивом.
- * Левый потомок вершины имеет индекс 2*i+1
- * Правый 2*i+2
- * Корень дерева имеет индекс 0.
- * Высота двоичной кучи равна высоте дерева, т.е. log2N.
- *
- * */
-
 template <class T>
 concept Eq = requires(T a, T b) {
     { a == b } -> std::convertible_to<bool>;
