@@ -1,10 +1,14 @@
 cmake_minimum_required(VERSION 3.21)
 
-message("ID: ${CMAKE_CXX_COMPILER}")
 project(binary_heap)
 
 set(CMAKE_CXX_STANDARD 20)
 
-include_directories(include)
+include_directories(tests)
 
-add_library(binary_heap main.cpp include/binary_heap.h src/binary_heap.cpp)
+add_subdirectory(lib)
+add_subdirectory(tests)
+
+add_subdirectory(third_party/googletest)
+
+add_compile_options(-Wall -Wextra -pedantic -Werror)

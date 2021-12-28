@@ -27,7 +27,7 @@ concept Ordering = Eq<T> && requires(T a, T b) {
 template <class T> requires Ordering<T>
 class BinaryHeap {
 protected:
-    std::vector<T> data;
+    std::vector<T> data {};
 public:
     BinaryHeap() {
         //
@@ -39,5 +39,18 @@ public:
 
     constexpr void append(T&& value) noexcept {
         data.emplace_back(std::move(value));
+        int new_element_pos = size() - 1; // place to the end
+        int parent_node_pos = (new_element_pos - 1) / 2; // get parent pos
+
+        while (new_element_pos > 0 && data[parent_node_pos] < data[new_element_pos]) { // while not root and bigger then parent
+            std::swap(data[parent_node_pos], data[new_element_pos]); // place to parent
+
+            new_element_pos = parent_node_pos;
+            parent_node_pos = (new_element_pos - 1) / 2;
+        }
+    }
+
+    constexpr const std::vector<T>& get_heap() const noexcept {
+        return data;
     }
 };
